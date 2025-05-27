@@ -13,16 +13,16 @@ public class AttendeeTest {
     @DisplayName("Should successfully register an attendee")
     public void testRegisterAttendee() {
         // Arrange
-        String email = "john.doe@example.com";
-        String firstName = "John";
-        String lastName = "Doe";
+        String email = "frodo.baggins@shire.me";
+        String firstName = "Frodo";
+        String lastName = "Baggins";
         Address address = new Address(
-                "123 Main St",
-                "Apt 4B",
-                "New York",
-                "NY",
-                "10001",
-                "USA"
+                "Bag End",
+                "Bagshot Row",
+                "Hobbiton",
+                "The Shire",
+                "SH1R3",
+                "Middle Earth"
         );
 
         // Act
@@ -34,10 +34,10 @@ public class AttendeeTest {
         assertNotNull(attendee, "Attendee should not be null");
         assertNotNull(event, "Event should not be null");
         assertEquals(email, attendee.getEmail(), "Email should match");
-        assertEquals("John Doe", attendee.getFullName(), "Full name should match");
+        assertEquals("Frodo Baggins", attendee.getFullName(), "Full name should match");
         assertEquals(address, attendee.getAddress(), "Address should match");
         assertEquals(email, event.email(), "Event email should match");
-        assertEquals("John Doe", event.fullName(), "Event full name should match");
+        assertEquals("Frodo Baggins", event.fullName(), "Event full name should match");
     }
 
     @Test
@@ -45,20 +45,20 @@ public class AttendeeTest {
     public void testGetFullName() {
         // Arrange
         Address address = new Address(
-                "123 Main St",
+                "Meduseld",
                 null,
-                "New York",
-                "NY",
-                "10001",
-                "USA"
+                "Edoras",
+                "Rohan",
+                "RH4N",
+                "Middle Earth"
         );
-        Attendee attendee = new Attendee("jane.doe@example.com", "Jane", "Doe", address);
+        Attendee attendee = new Attendee("eowyn@rohan.me", "Éowyn", "of Rohan", address);
 
         // Act
         String fullName = attendee.getFullName();
 
         // Assert
-        assertEquals("Jane Doe", fullName, "Full name should be correctly concatenated");
+        assertEquals("Éowyn of Rohan", fullName, "Full name should be correctly concatenated");
     }
 
     @Test
@@ -66,14 +66,14 @@ public class AttendeeTest {
     public void testGetAddress() {
         // Arrange
         Address address = new Address(
-                "123 Main St",
-                "Apt 4B",
-                "New York",
-                "NY",
-                "10001",
-                "USA"
+                "Citadel",
+                "7th Level",
+                "Minas Tirith",
+                "Gondor",
+                "MT777",
+                "Middle Earth"
         );
-        Attendee attendee = new Attendee("john.doe@example.com", "John", "Doe", address);
+        Attendee attendee = new Attendee("aragorn@gondor.me", "Aragorn", "Elessar", address);
 
         // Act
         Address retrievedAddress = attendee.getAddress();
@@ -81,12 +81,12 @@ public class AttendeeTest {
         // Assert
         assertNotNull(retrievedAddress, "Address should not be null");
         assertEquals(address, retrievedAddress, "Retrieved address should match the original");
-        assertEquals("123 Main St", retrievedAddress.street(), "Street should match");
-        assertEquals("Apt 4B", retrievedAddress.street2(), "Street2 should match");
-        assertEquals("New York", retrievedAddress.city(), "City should match");
-        assertEquals("NY", retrievedAddress.stateOrProvince(), "State should match");
-        assertEquals("10001", retrievedAddress.postCode(), "Post code should match");
-        assertEquals("USA", retrievedAddress.country(), "Country should match");
+        assertEquals("Citadel", retrievedAddress.street(), "Street should match");
+        assertEquals("7th Level", retrievedAddress.street2(), "Street2 should match");
+        assertEquals("Minas Tirith", retrievedAddress.city(), "City should match");
+        assertEquals("Gondor", retrievedAddress.stateOrProvince(), "State should match");
+        assertEquals("MT777", retrievedAddress.postCode(), "Post code should match");
+        assertEquals("Middle Earth", retrievedAddress.country(), "Country should match");
     }
 
     @Test
@@ -94,20 +94,46 @@ public class AttendeeTest {
     public void testGetEmail() {
         // Arrange
         Address address = new Address(
-                "123 Main St",
+                "Grey Havens",
                 null,
-                "New York",
-                "NY",
-                "10001",
-                "USA"
+                "Lindon",
+                "Eriador",
+                "GH123",
+                "Middle Earth"
         );
-        String email = "test@example.com";
-        Attendee attendee = new Attendee(email, "Test", "User", address);
+        String email = "gandalf@istari.me";
+        Attendee attendee = new Attendee(email, "Gandalf", "the Grey", address);
 
         // Act
         String retrievedEmail = attendee.getEmail();
 
         // Assert
         assertEquals(email, retrievedEmail, "Email should match");
+    }
+    
+    @Test
+    @DisplayName("Should verify AttendeeRegisteredEvent contains correct data")
+    public void testAttendeeRegisteredEvent() {
+        // Arrange
+        String email = "legolas@mirkwood.me";
+        String firstName = "Legolas";
+        String lastName = "Greenleaf";
+        Address address = new Address(
+                "Royal Palace",
+                "Woodland Realm",
+                "Mirkwood",
+                "Rhovanion",
+                "MK001",
+                "Middle Earth"
+        );
+        
+        // Act
+        AttendeeRegistrationResult result = Attendee.registerAttendee(email, firstName, lastName, address);
+        AttendeeRegisteredEvent event = result.attendeeRegisteredEvent();
+        
+        // Assert
+        assertNotNull(event, "Event should not be null");
+        assertEquals(email, event.email(), "Event email should match");
+        assertEquals("Legolas Greenleaf", event.fullName(), "Event full name should match");
     }
 }
