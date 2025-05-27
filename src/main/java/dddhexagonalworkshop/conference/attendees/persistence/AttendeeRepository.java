@@ -13,7 +13,15 @@ public class AttendeeRepository implements PanacheRepository<AttendeeEntity> {
     }
 
     private AttendeeEntity fromAggregate(Attendee attendee) {
-        AttendeeEntity entity = new AttendeeEntity(attendee.getEmail());
+        AddressEntity addressEntity = new AddressEntity(
+                attendee.getAddress().street(),
+                attendee.getAddress().street2(),
+                attendee.getAddress().city(),
+                attendee.getAddress().stateOrProvince(),
+                attendee.getAddress().postCode(),
+                attendee.getAddress().country()
+        );
+        AttendeeEntity entity = new AttendeeEntity(attendee.getEmail(), addressEntity);
         return entity;
     }
 }

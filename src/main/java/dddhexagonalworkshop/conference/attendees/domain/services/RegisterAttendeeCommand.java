@@ -1,4 +1,6 @@
 package dddhexagonalworkshop.conference.attendees.domain.services;
 
-public record RegisterAttendeeCommand(String email) {
+import dddhexagonalworkshop.conference.attendees.domain.valueobjects.Address;
+
+public record RegisterAttendeeCommand(String email, String firstName, String lastName, Address address) {
 }

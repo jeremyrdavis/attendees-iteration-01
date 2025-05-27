@@ -8,14 +8,17 @@ public class AttendeeEntity {
     @Id @GeneratedValue
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    AddressEntity address;
+
     private String email;
 
     protected AttendeeEntity() {
-
     }
 
-    protected AttendeeEntity(String email) {
+    protected AttendeeEntity(String email, AddressEntity address) {
         this.email = email;
+        this.address = address;
     }
 
     protected Long getId() {

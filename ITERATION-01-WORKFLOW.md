@@ -1,6 +1,8 @@
 # Workshop Workflow
 
-## Overview
+## Iteration 02: Add Attendee's Address
+
+### Overview
 
 First iteration: create the basic structure of the Attendee registration microservice using Hexagonal Architecture (Ports and Adapters) and Domain-Driven Design (DDD) principles.
 Second iteration: add the Attendee's Address

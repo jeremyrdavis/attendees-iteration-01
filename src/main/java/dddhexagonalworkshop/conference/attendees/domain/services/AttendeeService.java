@@ -21,7 +21,10 @@ public class AttendeeService {
     @Transactional
     public AttendeeDTO registerAttendee(RegisterAttendeeCommand registerAttendeeAttendeeCommand) {
         // Logic to register an attendee
-        AttendeeRegistrationResult result = Attendee.registerAttendee(registerAttendeeAttendeeCommand.email());
+        AttendeeRegistrationResult result = Attendee.registerAttendee(registerAttendeeAttendeeCommand.email(),
+                registerAttendeeAttendeeCommand.firstName(),
+                registerAttendeeAttendeeCommand.lastName(),
+                registerAttendeeAttendeeCommand.address());
 
 
         //persist the attendee
@@ -32,6 +35,6 @@ public class AttendeeService {
         //notify the system that a new attendee has been registered
         attendeeEventPublisher.publish(result.attendeeRegisteredEvent());
 
-        return new AttendeeDTO(result.attendee().getEmail());
+        return new AttendeeDTO(result.attendee().getEmail(), result.attendee().getFullName());
     }
 }
