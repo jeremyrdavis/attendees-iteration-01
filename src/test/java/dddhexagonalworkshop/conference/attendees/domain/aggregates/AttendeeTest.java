@@ -28,7 +28,7 @@ public class AttendeeTest {
         // Act
         AttendeeRegistrationResult result = Attendee.registerAttendee(email, firstName, lastName, address);
         Attendee attendee = result.attendee();
-        AttendeeRegisteredEvent event = result.event();
+        AttendeeRegisteredEvent event = result.attendeeRegisteredEvent();
 
         // Assert
         assertNotNull(attendee, "Attendee should not be null");
