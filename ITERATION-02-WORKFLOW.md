@@ -325,7 +325,7 @@ Third, update the `AttendeeRepository` to handle the new fields:
 ```java
 package dddhexagonalworkshop.conference.attendees.persistence;
 
-import dddhexagonalworkshop.conference.attendees.domain.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 public class AttendeeRepository implements PanacheRepository<AttendeeEntity> {
@@ -369,7 +369,7 @@ Second, update the `AttendeeService` to handle the new fields:
 ```java
 package dddhexagonalworkshop.conference.attendees.domain.services;
 
-import dddhexagonalworkshop.conference.attendees.domain.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
 import dddhexagonalworkshop.conference.attendees.infrastrcture.AttendeeDTO;
 import dddhexagonalworkshop.conference.attendees.infrastrcture.AttendeeEventPublisher;
 import dddhexagonalworkshop.conference.attendees.persistence.AttendeeRepository;

@@ -1,8 +1,10 @@
 package dddhexagonalworkshop.conference.attendees.persistence;
 
-import dddhexagonalworkshop.conference.attendees.domain.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class AttendeeRepository implements PanacheRepository<AttendeeEntity> {
 
 
