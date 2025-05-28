@@ -5,17 +5,27 @@ This document provides a summary of the four iterations in our DDD (Domain-Drive
 ## Iteration 1: Core Domain Model
 
 **Introduction:**
-In this iteration, you'll learn the fundamentals of Domain-Driven Design by implementing the core domain model for conference attendee registration. You'll focus on creating aggregates, value objects, and domain events that capture the essential business rules.
+In this iteration, we will cover the basics of Domain-Driven Design by implementing a basic workflow for registering a conference attendee. We will create the following DDD constructs:
+- Aggregate
+- Domain Service
+- Domain Event
+- Command
+- Adapter
+- Entity
+- Repository
 
 **Steps:**
-1. Create the `Attendee` aggregate with basic properties (email, name)
-2. Implement the `Address` value object with validation logic
-3. Define the `AttendeeRegisteredEvent` domain event
-4. Create a domain service for attendee registration
-5. Write unit tests for the domain model
+1. Create a `RegisterAttendeeCommand` with only one, basic property (email).
+2. Implement an Adapter in the form of a REST Endpoint, `AttendeeEndpoint` with a POST method.
+3. Implement a Service, `AttendeeService` that will orchestration the registration process.
+4. Create an `Attendee` entity that represents the attendee in the domain and implements the application's invariants or business rules.
+4. Create a Domain Event, `AttendeeRegisteredEvent`, that will be published when an attendee is successfully registered.
+5. Create a Repository interface, `AttendeeRepository`, that defines methods for saving and retrieving attendees.
+6. Create an Entity, `AttendeeEntity`, to persist instances of the `Attendee` entity in a database.
+7. Create an Adapter, `AttendeeEventPublisher`, that sends events to Kafka to propagate changes to the rest of the system.
 
 **Summary:**
-By the end of Iteration 1, you'll have a solid foundation in DDD concepts and a working domain model that encapsulates the core business logic for attendee registration. This model is independent of any infrastructure or framework concerns, focusing purely on the business domain.
+By the end of Iteration 1, you'll have a solid foundation in DDD concepts and a very basic working application.
 
 ## Iteration 2: Hexagonal Architecture
 

@@ -1,6 +1,8 @@
 # Workshop Workflow
 
-## Iteration 02: Add Attendee's Address
+## Iteration 02: Value Objects
+### DDD Concepts: Value Ojbects
+
 
 ### Overview
 In this iteration we will enhance the `Attendee` model by adding an address field. This will allow us to store more detailed information about each attendee.

@@ -1,17 +1,24 @@
 # Workshop Workflow
 
-## Iteration 02: Add Attendee's Address
+## Iteration 01: End to end DDD
+### DDD Concepts: Commands, Events, Aggregates, Domain Services, Repositories, Entities
 
 ### Overview
+
+You can type in the complete code or just copy and paste the code snippets provided below into your IDE.
 
 First iteration: create the basic structure of the Attendee registration microservice using Hexagonal Architecture (Ports and Adapters) and Domain-Driven Design (DDD) principles.
 Second iteration: add the Attendee's Address
 Third iteration: add the Attendee's Payment information, calling the Payment microservice, illustrating the Conformist integration pattern, and the Money Value Object.
 Fourth iteration: add the Anti-corruption Layer to illustrate the anti-corruption style integration pattern.
 
-## First Iteration
+## Commands
 
-- Create a RegisterAttendeeCommand object with a single String, "email"
+Commands are objects that encapsulate a request to perform an action. They are different from Events because Commands can fail or be rejected, while Events are statements of fact that have already happened.
+
+We will start by creating a command to register an attendee. This command will encapsulate the data needed to register an attendee, which in this iteration is just the email address.
+
+- Create a RegisterAttendeeCommand object with a single String, "email."
 
 ```java
 package dddhexagonalworkshop.conference.attendees.domain.services;
@@ -21,8 +28,13 @@ public record RegisterAttendeeCommand(String email) {
 
 ```
 
-- Create the AttendeeEndpoint in the attendees/domain/services package
-    - a single POST method that takes a RegisterAttendeeCommand
+## Adapters
+
+Adapters are components that translate between the domain model and external systems or frameworks. In the context of a REST endpoint, an adapter handles the conversion of HTTP requests to commands that the domain model can process, and vice versa for responses.
+
+We don't need to manually convert the JSON to and from Java objects, as Quarkus provides built-in support for this using Jackson. 
+
+Create the AttendeeEndpoint in the `dddhexagonalworkshop.conference.attendees.infrastructure` package.
 
 ```java
 package dddhexagonalworkshop.conference.attendees.infrastructure;
