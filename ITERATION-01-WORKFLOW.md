@@ -131,10 +131,11 @@ public record AttendeeRegisteredEvent(String email) {
 
 - Create the AttendeeRegistrationResult in the attendees/domain/services package
     - create two fields, "attendee" and "attendeeRegistrationEvent"
+
 ```java
 package dddhexagonalworkshop.conference.attendees.domain.services;
 
-import dddhexagonalworkshop.conference.attendees.domain.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
 import dddhexagonalworkshop.conference.attendees.domain.events.AttendeeRegisteredEvent;
 
 public record AttendeeRegistrationResult(Attendee attendee, AttendeeRegisteredEvent attendeeRegisteredEvent) {
@@ -171,7 +172,7 @@ public class Attendee {
 ```java
 package dddhexagonalworkshop.conference.attendees.persistence;
 
-import dddhexagonalworkshop.conference.attendees.domain.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 public class AttendeeRepository implements PanacheRepository<AttendeeEntity> {
@@ -221,7 +222,7 @@ public class AttendeeEventPublisher {
 ```java
 package dddhexagonalworkshop.conference.attendees.domain.services;
 
-import dddhexagonalworkshop.conference.attendees.domain.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
 import dddhexagonalworkshop.conference.attendees.infrastrcture.AttendeeDTO;
 import dddhexagonalworkshop.conference.attendees.infrastrcture.AttendeeEventPublisher;
 import dddhexagonalworkshop.conference.attendees.persistence.AttendeeRepository;

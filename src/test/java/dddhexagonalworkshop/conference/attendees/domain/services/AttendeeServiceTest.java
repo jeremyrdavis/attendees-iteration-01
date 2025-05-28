@@ -1,12 +1,20 @@
 package dddhexagonalworkshop.conference.attendees.domain.services;
 
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.events.AttendeeRegisteredEvent;
 import dddhexagonalworkshop.conference.attendees.infrastrcture.AttendeeEventPublisher;
+import dddhexagonalworkshop.conference.attendees.persistence.AttendeeEntity;
 import dddhexagonalworkshop.conference.attendees.persistence.AttendeeRepository;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
 
 @QuarkusTest
 public class AttendeeServiceTest {
@@ -23,6 +31,8 @@ public class AttendeeServiceTest {
     @BeforeEach
     public void setUp() {
         // Setup code if needed, e.g., mocking behavior of injected components
+        Mockito.doNothing().when(attendeeRepository).persist(any(AttendeeEntity.class));
+        Mockito.doNothing().when(attendeeEventPublisher).publish(any(AttendeeRegisteredEvent.class));
     }
 
     @Test
@@ -48,9 +58,9 @@ public class AttendeeServiceTest {
         attendeeService.registerAttendee(command);
 
         // Then: Verify the repository and event publisher were called
-        org.mockito.Mockito.verify(attendeeRepository).persist(org.mockito.ArgumentMatchers.any(
+        Mockito.verify(attendeeRepository).persist(any(
                 dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee.class));
-        org.mockito.Mockito.verify(attendeeEventPublisher).publish(org.mockito.ArgumentMatchers.any(
+        Mockito.verify(attendeeEventPublisher).publish(any(
                 dddhexagonalworkshop.conference.attendees.domain.events.AttendeeRegisteredEvent.class));
     }
 }

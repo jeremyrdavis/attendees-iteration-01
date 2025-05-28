@@ -1,6 +1,6 @@
 package dddhexagonalworkshop.conference.attendees.domain.services;
 
-import dddhexagonalworkshop.conference.attendees.domain.Attendee;
+import dddhexagonalworkshop.conference.attendees.domain.aggregates.Attendee;
 import dddhexagonalworkshop.conference.attendees.infrastrcture.AttendeeDTO;
 import dddhexagonalworkshop.conference.attendees.infrastrcture.AttendeeEventPublisher;
 import dddhexagonalworkshop.conference.attendees.persistence.AttendeeRepository;

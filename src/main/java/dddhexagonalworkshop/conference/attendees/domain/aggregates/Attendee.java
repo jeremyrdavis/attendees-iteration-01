@@ -1,4 +1,4 @@
-package dddhexagonalworkshop.conference.attendees.domain;
+package dddhexagonalworkshop.conference.attendees.domain.aggregates;
 
 import dddhexagonalworkshop.conference.attendees.domain.events.AttendeeRegisteredEvent;
 import dddhexagonalworkshop.conference.attendees.domain.services.AttendeeRegistrationResult;
